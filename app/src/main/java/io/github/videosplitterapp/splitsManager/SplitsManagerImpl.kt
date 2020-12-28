@@ -38,6 +38,7 @@ class SplitsManagerImpl @ViewModelInject constructor(
     private val _parseFileStatus = SingleLiveEvent<Boolean>()
     private val _slices = MutableLiveData<List<SliceModel>>()
     private val _importComplete = SingleLiveEvent<Boolean>()
+    private val _libraryMigration = MutableLiveData<Boolean>()
 
     init {
         reset()
@@ -45,7 +46,9 @@ class SplitsManagerImpl @ViewModelInject constructor(
 
     override fun migrateStorageToPublicDir() {
         viewModelScope.launch(Dispatchers.IO) {
+            _libraryMigration.postValue(true)
             fileManager.migrateStorageToPublicDir()
+            _libraryMigration.postValue(false)
         }
     }
 
@@ -77,6 +80,7 @@ class SplitsManagerImpl @ViewModelInject constructor(
     override val fileMeta: LiveData<FileMeta?> get() = _fileMeta
     override val slices: LiveData<List<SliceModel>> get() = _slices
     override val importComplete: SingleLiveEvent<Boolean> get() = _importComplete
+    override val libraryMigration: LiveData<Boolean> get() = _libraryMigration
 
     @UiThread
     override fun doThirtySecSplits() {

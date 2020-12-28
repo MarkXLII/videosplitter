@@ -1,15 +1,13 @@
 package io.github.videosplitterapp
 
-import android.app.ProgressDialog
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -18,6 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.videosplitterapp.databinding.MainActivityBinding
 import io.github.videosplitterapp.splitsManager.SplitsManager
@@ -54,7 +53,20 @@ class MainActivity : AppCompatActivity() {
                 setSupportActionBar(it.topAppBar)
                 NavigationUI.setupActionBarWithNavController(this, navController)
             }
+
+        val alertDialog: AlertDialog = MaterialAlertDialogBuilder(this)
+            .setTitle("Please wait")
+            .setMessage("Migrating videos to new library location...")
+            .setCancelable(false)
+            .create()
         splitsManager.migrateStorageToPublicDir()
+        splitsManager.libraryMigration.observe(this, {
+            if (it == true) {
+                alertDialog.show()
+            } else {
+                alertDialog.dismiss()
+            }
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {

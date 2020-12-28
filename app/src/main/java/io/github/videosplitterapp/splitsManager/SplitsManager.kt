@@ -28,6 +28,8 @@ interface SplitsManager {
 
     val importComplete: SingleLiveEvent<Boolean>
 
+    val libraryMigration: LiveData<Boolean>
+
     @UiThread
     fun doThirtySecSplits()
 
