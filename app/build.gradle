@@ -27,10 +27,10 @@ android {
         applicationId "io.github.videosplitterapp"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 2
+        versionCode 3
 
-        def majorVersion = 1
-        def minorVersion = 1
+        def majorVersion = 2
+        def minorVersion = 0
         versionName String.format("%d.%d.%d", majorVersion, minorVersion, versionCode)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
