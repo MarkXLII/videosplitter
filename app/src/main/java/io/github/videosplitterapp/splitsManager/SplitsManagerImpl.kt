@@ -43,6 +43,12 @@ class SplitsManagerImpl @ViewModelInject constructor(
         reset()
     }
 
+    override fun migrateStorageToPublicDir() {
+        viewModelScope.launch(Dispatchers.IO) {
+            fileManager.migrateStorageToPublicDir()
+        }
+    }
+
     @UiThread
     override fun importFile(uri: Uri) {
         Log.d(TAG, "importFile() called with: uri = $uri")

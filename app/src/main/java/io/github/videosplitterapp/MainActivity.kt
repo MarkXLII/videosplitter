@@ -1,12 +1,15 @@
 package io.github.videosplitterapp
 
+import android.app.ProgressDialog
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -51,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                 setSupportActionBar(it.topAppBar)
                 NavigationUI.setupActionBarWithNavController(this, navController)
             }
+        splitsManager.migrateStorageToPublicDir()
     }
 
     override fun onSupportNavigateUp(): Boolean {

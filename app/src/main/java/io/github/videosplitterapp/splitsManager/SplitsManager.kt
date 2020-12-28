@@ -45,6 +45,8 @@ interface SplitsManager {
 
     fun startOver()
 
+    fun migrateStorageToPublicDir()
+
     enum class State(var splitType: SplitType? = null) {
         IDLE,
         PROCESSING_VIDEO,

@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.annotation.WorkerThread
 import com.arthenica.mobileffmpeg.FFprobe
 import dagger.hilt.android.qualifiers.ApplicationContext
+import io.github.videosplitterapp.R
 import io.github.videosplitterapp.ffmpeg.FFMpegUtil
 import io.github.videosplitterapp.splitsManager.SliceModel
 import io.github.videosplitterapp.splitsManager.SplitsManager
@@ -101,8 +102,7 @@ class FileManagerImpl @Inject constructor(
     @WorkerThread
     override fun createSplitDirs(splitType: SplitsManager.SplitType, meta: FileMeta): String {
         Log.d(TAG, "createDirs() called with: splitType = $splitType, meta = $meta")
-        val rootOutputDir: File =
-            applicationContext.getExternalFilesDir(Environment.DIRECTORY_MOVIES) ?: return ""
+        val rootOutputDir: File = appStorageRoot
         val splitsDir = generatePath(
             rootOutputDir.absolutePath,
             meta.titleNoExt,
@@ -121,9 +121,7 @@ class FileManagerImpl @Inject constructor(
     @WorkerThread
     override fun getProjects(): List<ProjectModel> {
         Log.d(TAG, "getProjects() called")
-        val rootOutputDir: File =
-            applicationContext.getExternalFilesDir(Environment.DIRECTORY_MOVIES)
-                ?: return emptyList()
+        val rootOutputDir: File = appStorageRoot
         val result = ArrayList<ProjectModel>()
         if (rootOutputDir.isDirectory) {
             val files = rootOutputDir.listFiles()
@@ -145,9 +143,7 @@ class FileManagerImpl @Inject constructor(
     @WorkerThread
     override fun getProjectSplits(projectName: String): List<ProjectSplitModel> {
         Log.d(TAG, "getProjectSplits() called with: projectName = $projectName")
-        val rootOutputDir: File =
-            applicationContext.getExternalFilesDir(Environment.DIRECTORY_MOVIES)
-                ?: return emptyList()
+        val rootOutputDir: File = appStorageRoot
         val path = generatePath(rootOutputDir.absolutePath, projectName)
         val projectDir = File(path)
         if (projectDir.exists().not()) return emptyList()
@@ -184,9 +180,7 @@ class FileManagerImpl @Inject constructor(
                     "projectName = $projectName, " +
                     "splitType = $splitType"
         )
-        val rootOutputDir: File =
-            applicationContext.getExternalFilesDir(Environment.DIRECTORY_MOVIES)
-                ?: return emptyList()
+        val rootOutputDir: File = appStorageRoot
         val path = generatePath(rootOutputDir.absolutePath, projectName, splitType.dirName)
         val slicesDir = File(path)
         if (slicesDir.exists().not()) return emptyList()
@@ -223,13 +217,74 @@ class FileManagerImpl @Inject constructor(
     @WorkerThread
     override fun delete(projectName: String, splitType: SplitsManager.SplitType) {
         Log.d(TAG, "delete() called with: projectName = $projectName, splitType = $splitType")
-        val rootOutputDir: File =
-            applicationContext.getExternalFilesDir(Environment.DIRECTORY_MOVIES)
-                ?: return
+        val rootOutputDir: File = appStorageRoot
         val path = generatePath(rootOutputDir.absolutePath, projectName, splitType.dirName)
         val slicesDir = File(path)
         slicesDir.deleteRecursively()
     }
+
+    @WorkerThread
+    override fun migrateStorageToPublicDir() {
+        val oldRootOutputDir: File =
+            applicationContext.getExternalFilesDir(Environment.DIRECTORY_MOVIES)
+                ?: return
+        oldRootOutputDir.listFiles()?.forEach {
+            if (it.exists() && it.isDirectory) {
+                val projectName: String = it.name
+                Log.d(TAG, "migrateStorageToPublicDir: moving project $projectName")
+                val newProjectDirPath = generatePath(appStorageRoot.absolutePath, projectName)
+                val newProjectDir = File(newProjectDirPath)
+                if (!newProjectDir.exists() || !newProjectDir.isDirectory) {
+                    newProjectDir.mkdir()
+                }
+                moveProject(it, newProjectDir)
+            }
+        }
+    }
+
+    private fun moveProject(projectPath: File?, newProjectDir: File) {
+        projectPath?.listFiles()?.forEach {
+            if (it.exists() && it.isDirectory) {
+                val splitDirPath: String = it.name
+                Log.d(TAG, "moveProject: moving splits $splitDirPath")
+                val newSplitDirPath = generatePath(newProjectDir.absolutePath, splitDirPath)
+                val newSplitDir = File(newSplitDirPath)
+                if (!newProjectDir.exists() || !newProjectDir.isDirectory) {
+                    newProjectDir.mkdir()
+                }
+                moveSplits(it, newSplitDir)
+            }
+        }
+    }
+
+    private fun moveSplits(splitDirPath: File?, newSplitDir: File) {
+        splitDirPath?.listFiles()?.forEach {
+            if (it.exists() && it.isFile) {
+                Log.d(TAG, "moveSplits: moving file ${it.name} to ${newSplitDir.absolutePath}")
+                it.let { sourceFile ->
+                    val destFile = File(generatePath(newSplitDir.absolutePath, sourceFile.name))
+                    destFile.delete()
+                    sourceFile.copyTo(destFile)
+                    sourceFile.delete()
+                }
+            }
+        }
+    }
+
+    private val appStorageRoot: File
+        get() {
+            val externalStoragePublicDirectory =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)
+            val appStorageRootPath = generatePath(
+                externalStoragePublicDirectory.absolutePath,
+                applicationContext.getString(R.string.app_name)
+            )
+            val appStorageRoot = File(appStorageRootPath)
+            if (!appStorageRoot.exists() || !appStorageRoot.isDirectory) {
+                appStorageRoot.mkdir()
+            }
+            return appStorageRoot
+        }
 
     private fun fileTimeToString(time: Long): String {
         return fileTimeDateFormatter.format(Date(time))

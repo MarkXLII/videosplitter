@@ -32,4 +32,7 @@ interface FileManager {
 
     @WorkerThread
     fun delete(projectName: String, splitType: SplitsManager.SplitType)
+
+    @WorkerThread
+    fun migrateStorageToPublicDir()
 }
