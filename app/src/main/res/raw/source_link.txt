@@ -1,0 +1,3 @@
+Source licensed under GPLv3:
+
+https://github.com/VideoSplitterApp/VideoSplitterApp

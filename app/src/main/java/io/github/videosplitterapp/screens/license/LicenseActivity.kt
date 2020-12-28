@@ -3,11 +3,15 @@ package io.github.videosplitterapp.screens.license
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.videosplitterapp.R
 import io.github.videosplitterapp.databinding.LicenseActivityBinding
+import java.io.InputStream
+
 
 @AndroidEntryPoint
 class LicenseActivity : AppCompatActivity() {
@@ -25,7 +29,7 @@ class LicenseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val item: LicenseItem? = intent.getParcelableExtra(KEY_ITEM)
+        val item: LicenseItem = intent.getParcelableExtra(KEY_ITEM) ?: return
         DataBindingUtil.setContentView<LicenseActivityBinding>(this, R.layout.license_activity)
             .also {
                 it.item = item
@@ -33,7 +37,7 @@ class LicenseActivity : AppCompatActivity() {
                 setSupportActionBar(it.topAppBar)
                 supportActionBar?.apply {
                     setDisplayHomeAsUpEnabled(true)
-                    title = item?.name.orEmpty()
+                    title = getString(item.name)
                 }
             }
     }
@@ -41,5 +45,16 @@ class LicenseActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
+    }
+}
+
+@BindingAdapter("rawTextResId")
+fun TextView.setFromRaw(rawTextResId: Int) {
+    text = try {
+        val inputStream: InputStream = resources.openRawResource(rawTextResId)
+        val inputAsString = inputStream.bufferedReader().use { it.readText() }
+        inputAsString
+    } catch (e: Exception) {
+        context.getString(R.string.generic_error)
     }
 }

@@ -47,7 +47,7 @@
                 android:layout_height="0dp"
                 android:clipToPadding="false"
                 android:padding="@dimen/default_margin"
-                android:text="@{item.text}"
+                app:rawTextResId="@{item.rawTextResId}"
                 app:fontFamily="monospace"
                 tools:text="Test" />
 

@@ -15,5 +15,8 @@ class LicenseViewModel : ViewModel() {
         items.add(licenseExoPlayer)
         items.add(licenseGlide)
         items.add(licenseMaterialIcons)
+
+        items.add(licenseVideoSplitterApp)
+        items.add(licenseVideoSplitterAppSource)
     }
 }

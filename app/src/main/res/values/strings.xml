@@ -45,4 +45,17 @@
     <string name="share">Share</string>
 
     <string name="there_s_nothing_here">There\'s nothing here.</string>
+    <string name="generic_error">Error: Something went wrong</string>
+
+    <string name="binding_collection_adapter">BindingCollectionAdapter</string>
+    <string name="exo_player">ExoPlayer</string>
+    <string name="glide">Glide</string>
+    <string name="material_components_for_android">Material Components for Android</string>
+    <string name="material_icons">Material icons</string>
+    <string name="mobile_ffmpeg">MobileFFmpeg</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of service</string>
+
+    <string name="app_name_license" translatable="false">&appname; License [GPLv3]</string>
+    <string name="app_source" translatable="false">&appname; Source [GPLv3]</string>
 </resources>
