@@ -25,17 +25,19 @@
     <string name="feedback_data">mailto:videosplitterapp@gmail.com?subject=Feedback on &appname;</string>
     <string name="quality_setting_summary">%1$s\n\nHigher the quality, larger the output file size and can take longer time process</string>
 
-    <string name="video_quality_value_very_low">-qscale:v 31</string>
-    <string name="video_quality_value_low">-qscale:v 27</string>
-    <string name="video_quality_value_medium">-qscale:v 9</string>
-    <string name="video_quality_value_high">-qscale:v 3</string>
-    <string name="video_quality_value_very_high">-qscale:v 1</string>
+    <string name="video_quality_value_original">copy</string>
+    <string name="video_quality_value_very_low">libx264 -preset faster</string>
+    <string name="video_quality_value_low">libx264 -preset fast</string>
+    <string name="video_quality_value_medium">libx264 -preset medium</string>
+    <string name="video_quality_value_high">libx264 -preset slow</string>
+    <string name="video_quality_value_very_high">libx264 -preset veryslow</string>
 
-    <string name="audio_quality_value_very_low">-qscale:a 9</string>
-    <string name="audio_quality_value_low">-qscale:a 8</string>
-    <string name="audio_quality_value_medium">-qscale:a 6</string>
-    <string name="audio_quality_value_high">-qscale:a 1</string>
-    <string name="audio_quality_value_very_high">-qscale:a 0</string>
+    <string name="audio_quality_value_original">copy</string>
+    <string name="audio_quality_value_very_low">aac -qscale:a 9</string>
+    <string name="audio_quality_value_low">aac -qscale:a 8</string>
+    <string name="audio_quality_value_medium">aac -qscale:a 6</string>
+    <string name="audio_quality_value_high">aac -qscale:a 1</string>
+    <string name="audio_quality_value_very_high">aac -qscale:a 0</string>
 
     <string name="key_dark_theme">key_dark_theme</string>
     <string name="key_video_quality">key_video_quality</string>

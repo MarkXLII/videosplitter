@@ -17,15 +17,30 @@ class SettingsDataStore(context: Context) : PreferenceDataStore(), Settings {
 
     private val keyDarkTheme = context.getString(R.string.key_dark_theme)
     private val keyVideoQuality = context.getString(R.string.key_video_quality)
-    private val keyAudioQuality = context.getString(R.string.key_video_quality)
+    private val keyAudioQuality = context.getString(R.string.key_audio_quality)
 
     private val darkModeDefault = context.resources.configuration.uiMode and
             Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
-    private val videoQualityDefault = context.getString(R.string.video_quality_value_high)
-    private val audioQualityDefault = context.getString(R.string.audio_quality_value_high)
+    private val videoQualityDefault = context.getString(R.string.video_quality_value_very_low)
+    private val audioQualityDefault = context.getString(R.string.audio_quality_value_very_low)
 
     companion object {
         private val TAG = SettingsDataStore::class.java.name
+    }
+
+    init {
+        val allVideoQualities = context.resources.getStringArray(R.array.video_quality_values)
+        val videoQuality = getVideoQuality()
+        if (!allVideoQualities.contains(videoQuality)) {
+            Log.d(TAG, "init: Invalid videoQuality $videoQuality, setting to $videoQualityDefault")
+            setDefaultVideoQuality()
+        }
+        val allAudioQualities = context.resources.getStringArray(R.array.audio_quality_values)
+        val audioQuality = getAudioQuality()
+        if (!allAudioQualities.contains(audioQuality)) {
+            Log.d(TAG, "init: Invalid audioQuality $audioQuality, setting to $audioQualityDefault")
+            setDefaultAudioQuality()
+        }
     }
 
     override fun updateTheme() {
@@ -80,5 +95,13 @@ class SettingsDataStore(context: Context) : PreferenceDataStore(), Settings {
 
     private fun changeThemeToDark(dark: Boolean) {
         AppCompatDelegate.setDefaultNightMode(if (dark) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
+    }
+
+    private fun setDefaultVideoQuality() {
+        sharedPreferences.edit().putString(keyVideoQuality, videoQualityDefault).apply()
+    }
+
+    private fun setDefaultAudioQuality() {
+        sharedPreferences.edit().putString(keyAudioQuality, audioQualityDefault).apply()
     }
 }

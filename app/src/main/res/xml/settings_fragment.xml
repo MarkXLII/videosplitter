@@ -23,7 +23,7 @@
 
         <ListPreference
             android:summary="@string/quality_setting_summary"
-            app:defaultValue="@string/video_quality_value_high"
+            app:defaultValue="@string/video_quality_value_very_low"
             app:entries="@array/video_quality_labels"
             app:entryValues="@array/video_quality_values"
             app:iconSpaceReserved="false"
@@ -33,7 +33,7 @@
 
         <ListPreference
             android:summary="@string/quality_setting_summary"
-            app:defaultValue="@string/audio_quality_value_high"
+            app:defaultValue="@string/audio_quality_value_very_low"
             app:entries="@array/audio_quality_labels"
             app:entryValues="@array/audio_quality_values"
             app:iconSpaceReserved="false"

@@ -23,8 +23,8 @@ class FFMpegUtilImpl @Inject constructor(private val settings: Settings) : FFMpe
         private const val CMD_PART_OUTPUT = "\"%s\""
         private const val CMD_PART_SPLIT_START = "-ss %s"
         private const val CMD_PART_SPLIT_END = "-to %s"
-        private const val CMD_PART_VIDEO_CODEC = "-c:v mpeg4 %s"
-        private const val CMD_PART_AUDIO_CODEC = "-c:a libmp3lame %s"
+        private const val CMD_PART_VIDEO_CODEC = "-c:v %s"
+        private const val CMD_PART_AUDIO_CODEC = "-c:a %s"
 
         private fun getSecondsString(time: Long): String {
             val seconds = TimeUnit.MILLISECONDS.toSeconds(time)

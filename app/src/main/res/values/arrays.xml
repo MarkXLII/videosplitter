@@ -6,6 +6,7 @@
     </array>
 
     <array name="video_quality_labels">
+        <item>Original</item>
         <item>Very low</item>
         <item>Low</item>
         <item>Medium</item>
@@ -13,6 +14,7 @@
         <item>Very high</item>
     </array>
     <array name="video_quality_values">
+        <item>@string/video_quality_value_original</item>
         <item>@string/video_quality_value_very_low</item>
         <item>@string/video_quality_value_low</item>
         <item>@string/video_quality_value_medium</item>
@@ -21,6 +23,7 @@
     </array>
 
     <array name="audio_quality_labels">
+        <item>Original</item>
         <item>Very low</item>
         <item>Low</item>
         <item>Medium</item>
@@ -28,6 +31,7 @@
         <item>Very high</item>
     </array>
     <array name="audio_quality_values">
+        <item>@string/audio_quality_value_original</item>
         <item>@string/audio_quality_value_very_low</item>
         <item>@string/audio_quality_value_low</item>
         <item>@string/audio_quality_value_medium</item>
