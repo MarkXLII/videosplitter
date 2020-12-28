@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewInteraction"
+            type="io.github.videosplitterapp.SplitDoneListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/default_margin">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textBusy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/splits_done"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCheckProgress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonCheckProgress"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_half"
+            android:onClick="@{() -> viewInteraction.checkProgress()}"
+            android:text="@string/open"
+            app:icon="@drawable/ic_video_library"
+            app:iconSize="@dimen/button_icon_size"
+            app:layout_constraintBottom_toTopOf="@id/buttonStartOver"
+            app:layout_constraintEnd_toEndOf="@id/textBusy"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/textBusy"
+            app:layout_constraintTop_toBottomOf="@+id/textBusy" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonStartOver"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewInteraction.startOver()}"
+            android:text="@string/start_over"
+            app:layout_constraintBottom_toTopOf="@id/buttonNew"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonNew"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewInteraction.newProject()}"
+            android:text="@string/new_project"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

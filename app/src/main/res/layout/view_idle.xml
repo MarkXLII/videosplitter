@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewInteraction"
+            type="io.github.videosplitterapp.screens.landing.LandingViewInteraction" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="@{() -> viewInteraction.openVideo()}"
+        android:padding="@dimen/default_margin"
+        tools:showIn="@layout/landing_fragment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/addIcon"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:alpha="0.3"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_add_circle_outline"
+            android:tint="?attr/colorOnBackground"
+            app:layout_constraintBottom_toTopOf="@+id/hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintWidth_percent="0.3" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/default_margin"
+            android:paddingEnd="@dimen/default_margin"
+            android:text="@string/open_video"
+            android:textAppearance="?attr/textAppearanceCaption"
+            app:layout_constraintBottom_toTopOf="@+id/buttonGoToLibrary"
+            app:layout_constraintEnd_toEndOf="@id/addIcon"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/addIcon"
+            app:layout_constraintTop_toBottomOf="@+id/addIcon" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonGoToLibrary"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewInteraction.openLibrary()}"
+            android:text="Library"
+            app:icon="@drawable/ic_video_library"
+            app:iconGravity="textStart"
+            app:iconSize="@dimen/button_icon_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

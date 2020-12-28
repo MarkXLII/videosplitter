@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="appearance_category"
+        app:title="Appearance">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="@string/key_dark_theme"
+            app:title="Dark theme" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="export_sharing"
+        app:title="Export &amp; sharing options">
+
+        <ListPreference
+            android:summary="@string/quality_setting_summary"
+            app:defaultValue="@string/video_quality_value_high"
+            app:entries="@array/video_quality_labels"
+            app:entryValues="@array/video_quality_values"
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="true"
+            app:key="@string/key_video_quality"
+            app:title="Video Quality" />
+
+        <ListPreference
+            android:summary="@string/quality_setting_summary"
+            app:defaultValue="@string/audio_quality_value_high"
+            app:entries="@array/audio_quality_labels"
+            app:entryValues="@array/audio_quality_values"
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="true"
+            app:key="@string/key_audio_quality"
+            app:title="Audio Quality" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="other"
+        app:title="Other">
+
+        <PreferenceScreen
+            app:iconSpaceReserved="false"
+            app:key="feedback"
+            app:summary="Report technical issues or suggest new features"
+            app:title="Send feedback">
+
+            <intent
+                android:action="android.intent.action.SENDTO"
+                android:data="@string/feedback_data" />
+
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            app:iconSpaceReserved="false"
+            app:key="licenses"
+            app:title="Licenses">
+
+            <intent android:action="io.github.videosplitterapp.screens.license.LicenseListActivity" />
+
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            app:iconSpaceReserved="false"
+            app:key="privacy_policy"
+            app:title="Privacy Policy">
+
+            <intent android:action="io.github.videosplitterapp.screens.license.PrivacyPolicyActivity" />
+
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            app:iconSpaceReserved="false"
+            app:key="tos"
+            app:title="Terms of service">
+
+            <intent android:action="io.github.videosplitterapp.screens.license.ToSActivity" />
+
+        </PreferenceScreen>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="key_about"
+        app:title="About">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="app_version"
+            app:title="@string/app_name" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

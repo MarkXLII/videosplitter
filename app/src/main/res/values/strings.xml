@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE resources [<!ENTITY appname "Video Splitter">]>
+
+<resources>
+    <string name="app_name" translatable="false">&appname;</string>
+    <string name="open_video">Tap anywhere to open a new video</string>
+    <string name="open">Open</string>
+    <string name="why_permission_files">&appname; requires storage access to open and save your videos.</string>
+    <string name="permission_deny_title">Could not load video</string>
+    <string name="permission_deny_message">&appname; doesn\'t work without access to your videos. Turn it on in settings.</string>
+    <string name="ok">OK</string>
+    <string name="settings">Settings</string>
+    <string name="loading_the_video">Loading the video</string>
+    <string name="more">More</string>
+    <string name="split">Split</string>
+    <string name="thirty_seconds_splits_title">30 seconds splits</string>
+    <string name="thirty_seconds_splits_subtitle">Make 30 seconds slices of your video, ideal for WhatsApp status.</string>
+    <string name="split_button_title">Split Now</string>
+    <string name="split_in_progress">Split in Progress</string>
+    <string name="check_progress">Check Progress</string>
+    <string name="splits_done">Splits done</string>
+    <string name="start_over">Start Over with same video</string>
+    <string name="new_project">New Project</string>
+    <string name="feedback_data">mailto:videosplitterapp@gmail.com?subject=Feedback on &appname;</string>
+    <string name="quality_setting_summary">%1$s\n\nHigher the quality, larger the output file size and can take longer time process</string>
+
+    <string name="video_quality_value_very_low">-qscale:v 31</string>
+    <string name="video_quality_value_low">-qscale:v 27</string>
+    <string name="video_quality_value_medium">-qscale:v 9</string>
+    <string name="video_quality_value_high">-qscale:v 3</string>
+    <string name="video_quality_value_very_high">-qscale:v 1</string>
+
+    <string name="audio_quality_value_very_low">-qscale:a 9</string>
+    <string name="audio_quality_value_low">-qscale:a 8</string>
+    <string name="audio_quality_value_medium">-qscale:a 6</string>
+    <string name="audio_quality_value_high">-qscale:a 1</string>
+    <string name="audio_quality_value_very_high">-qscale:a 0</string>
+
+    <string name="key_dark_theme">key_dark_theme</string>
+    <string name="key_video_quality">key_video_quality</string>
+    <string name="key_audio_quality">key_audio_quality</string>
+
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+
+    <string name="there_s_nothing_here">There\'s nothing here.</string>
+</resources>

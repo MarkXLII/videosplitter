@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="io.github.videosplitterapp.ffmpeg.FFMpegUtil.Status" />
+
+        <variable
+            name="item"
+            type="io.github.videosplitterapp.splitsManager.SliceModel" />
+
+        <variable
+            name="viewInteraction"
+            type="io.github.videosplitterapp.splits.SplitViewInteraction" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="@{item.state.status == Status.SUCCESS}"
+        android:focusable="@{item.state.status == Status.SUCCESS}"
+        android:onClick="@{() -> viewInteraction.onItemClick(item)}"
+        android:onLongClick="@{(view) -> viewInteraction.onLongClick(item)}"
+        android:paddingTop="@dimen/default_margin_half"
+        android:paddingBottom="@dimen/default_margin_half">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/thumb"
+            android:layout_width="@dimen/thumb_width"
+            android:layout_height="@dimen/thumb_height"
+            android:background="@{item.state.status == Status.SUCCESS ? @android:color/black : @android:color/darker_gray}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:thumbPath="@{item.thumbPath}" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:indeterminate="false"
+            android:max="@{item.state.total}"
+            android:progress="@{item.state.progress}"
+            android:visibility="@{item.state.status == Status.IN_PROGRESS ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/thumb"
+            app:layout_constraintEnd_toEndOf="@id/thumb"
+            app:layout_constraintStart_toStartOf="@id/thumb"
+            tools:progress="30" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:ellipsize="end"
+            android:enabled="@{item.state.status == Status.SUCCESS || item.state.status == Status.IN_PROGRESS}"
+            android:gravity="start"
+            android:singleLine="true"
+            android:text="@{item.title}"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintBottom_toTopOf="@+id/subtitle"
+            app:layout_constraintEnd_toStartOf="@id/barrier"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/thumb"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Video title" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:enabled="@{item.state.status == Status.SUCCESS || item.state.status == Status.IN_PROGRESS}"
+            android:gravity="start"
+            android:singleLine="true"
+            android:text="@{item.duration}"
+            android:textAppearance="?attr/textAppearanceCaption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="00:00 - 00:30" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left"
+            app:constraint_referenced_ids="share,check,progressIndeterminate,progressText" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/share"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{(view) -> viewInteraction.onOptionMenuClicked(view, item)}"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_arrow_drop_down"
+            android:tint="?attr/colorControlNormal"
+            android:visibility="@{item.state.status == Status.SUCCESS &amp;&amp; !viewInteraction.inEditMode? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/check"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@{item.selected ? @drawable/ic_check_box_checked : @drawable/ic_check_box_unchecked}"
+            android:tint="?attr/colorControlNormal"
+            android:visibility="@{item.state.status == Status.SUCCESS &amp;&amp; viewInteraction.inEditMode? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressIndeterminate"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:indeterminate="true"
+            android:visibility="@{(item.state.status == Status.IN_QUEUE) ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:progress="30" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/progressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:visibility="@{(item.state.status == Status.IN_PROGRESS) ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:progress="@{item.state}"
+            tools:text="20%" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

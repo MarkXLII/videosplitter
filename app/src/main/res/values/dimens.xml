@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_margin">16dp</dimen>
+    <dimen name="default_margin_half">8dp</dimen>
+    <dimen name="default_margin_double">32dp</dimen>
+    <dimen name="thumb_width">100dp</dimen>
+    <dimen name="thumb_height">56dp</dimen>
+    <dimen name="button_icon_size">18dp</dimen>
+</resources>

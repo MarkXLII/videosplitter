@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/landingFragment">
+
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="io.github.videosplitterapp.screens.landing.LandingFragment"
+        android:label=""
+        tools:layout="@layout/landing_fragment">
+
+        <action
+            android:id="@+id/action_landingFragment_to_thirtySecSplitFragment"
+            app:destination="@id/thirtySecSplitFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_landingFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/thirtySecSplitFragment"
+        android:name="io.github.videosplitterapp.screens.thirtysecsplit.ThirtySecSplitFragment"
+        android:label=""
+        tools:layout="@layout/thirty_sec_split_fragment">
+
+        <action
+            android:id="@+id/action_thirtySecSplitFragment_to_splitsFragment"
+            app:destination="@id/splitsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/customSplitFragment"
+        android:name="io.github.videosplitterapp.screens.customsplit.CustomSplitFragment"
+        android:label=""
+        tools:layout="@layout/custom_split_fragment">
+
+        <action
+            android:id="@+id/action_customSplitFragment_to_splitsFragment"
+            app:destination="@id/splitsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/oneSplitFragment"
+        android:name="io.github.videosplitterapp.screens.onesplit.OneSplitFragment"
+        android:label=""
+        tools:layout="@layout/one_split_fragment">
+
+        <action
+            android:id="@+id/action_oneSplitFragment_to_splitsFragment"
+            app:destination="@id/splitsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/manualSplitFragment"
+        android:name="io.github.videosplitterapp.screens.manualsplit.ManualSplitFragment"
+        android:label=""
+        tools:layout="@layout/manual_split_fragment">
+
+        <action
+            android:id="@+id/action_manualSplitFragment_to_splitsFragment"
+            app:destination="@id/splitsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="io.github.videosplitterapp.library.project.LibraryFragment"
+        android:label=""
+        tools:layout="@layout/library_fragment">
+
+        <action
+            android:id="@+id/action_libraryFragment_to_projectSplitsFragment"
+            app:destination="@id/projectSplitsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_libraryFragment_to_splitsFragment"
+            app:destination="@id/splitsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/projectSplitsFragment"
+        android:name="io.github.videosplitterapp.library.projectsplits.ProjectSplitsFragment"
+        android:label=""
+        tools:layout="@layout/project_splits_fragment">
+
+        <argument
+            android:name="projectName"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_projectSplitsFragment_to_localSplitsFragment"
+            app:destination="@id/localSplitsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_projectSplitsFragment_to_splitsFragment"
+            app:destination="@id/splitsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/localSplitsFragment"
+        android:name="io.github.videosplitterapp.library.localsplits.LocalSplitsFragment"
+        android:label=""
+        tools:layout="@layout/local_splits_fragment">
+
+        <argument
+            android:name="projectName"
+            app:argType="string" />
+
+        <argument
+            android:name="splitType"
+            app:argType="io.github.videosplitterapp.splitsManager.SplitsManager$SplitType" />
+
+        <action
+            android:id="@+id/action_localSplitsFragment_to_playerActivity"
+            app:destination="@id/playerActivity"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/splitsFragment"
+        android:name="io.github.videosplitterapp.splits.SplitsFragment"
+        android:label=""
+        tools:layout="@layout/splits_fragment">
+
+        <action
+            android:id="@+id/action_splitsFragment_to_playerActivity"
+            app:destination="@id/playerActivity"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <activity
+        android:id="@+id/playerActivity"
+        android:name="io.github.videosplitterapp.player.PlayerActivity"
+        android:label=""
+        tools:layout="@layout/player_activity">
+
+        <argument
+            android:name="filePath"
+            app:argType="string" />
+
+    </activity>
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="io.github.videosplitterapp.MainActivity"
+        android:label="MainActivity"
+        tools:layout="@layout/main_activity" />
+
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="io.github.videosplitterapp.screens.settings.SettingsActivity"
+        android:label="@string/settings" />
+
+    <action
+        android:id="@+id/action_global_settingsActivity"
+        app:destination="@id/settingsActivity" />
+
+</navigation>

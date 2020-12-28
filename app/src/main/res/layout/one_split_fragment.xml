@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="io.github.videosplitterapp.splitsManager.SplitsManager.State" />
+
+        <variable
+            name="splitsManager"
+            type="io.github.videosplitterapp.splitsManager.SplitsManager" />
+
+        <variable
+            name="oneSplitViewModel"
+            type="io.github.videosplitterapp.screens.onesplit.OneSplitViewModel" />
+
+        <variable
+            name="viewInteraction"
+            type="io.github.videosplitterapp.screens.thirtysecsplit.ThirtySecSplitViewInteraction" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/view_one_split_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{(splitsManager.state == State.READY_TO_SPLIT) ? View.VISIBLE : View.GONE}"
+            app:oneSplitViewModel="@{oneSplitViewModel}"
+            app:viewInteraction="@{viewInteraction}" />
+
+        <include
+            android:id="@+id/viewProgress"
+            layout="@layout/view_split_in_progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{(splitsManager.state == State.SPLITTING) ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:viewInteraction="@{viewInteraction}" />
+
+        <include
+            android:id="@+id/viewDone"
+            layout="@layout/view_splits_done"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{(splitsManager.state == State.SPLITTING_DONE) ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:viewInteraction="@{viewInteraction}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

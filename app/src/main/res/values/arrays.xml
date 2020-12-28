@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="initial_range_slider_values">
+        <item>0.0</item>
+        <item>1.0</item>
+    </array>
+
+    <array name="video_quality_labels">
+        <item>Very low</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Very high</item>
+    </array>
+    <array name="video_quality_values">
+        <item>@string/video_quality_value_very_low</item>
+        <item>@string/video_quality_value_low</item>
+        <item>@string/video_quality_value_medium</item>
+        <item>@string/video_quality_value_high</item>
+        <item>@string/video_quality_value_very_high</item>
+    </array>
+
+    <array name="audio_quality_labels">
+        <item>Very low</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Very high</item>
+    </array>
+    <array name="audio_quality_values">
+        <item>@string/audio_quality_value_very_low</item>
+        <item>@string/audio_quality_value_low</item>
+        <item>@string/audio_quality_value_medium</item>
+        <item>@string/audio_quality_value_high</item>
+        <item>@string/audio_quality_value_very_high</item>
+    </array>
+
+</resources>

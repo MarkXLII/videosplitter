@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/thirtySecSplitFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_30s"
+        android:title="30s" />
+
+    <item
+        android:id="@+id/customSplitFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_custom"
+        android:title="Custom" />
+
+    <item
+        android:id="@+id/oneSplitFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_one_split"
+        android:title="One" />
+
+    <item
+        android:id="@+id/manualSplitFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_manual"
+        android:title="Manual" />
+
+    <item
+        android:id="@+id/libraryFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_video_library"
+        android:title="Library" />
+
+</menu>
