@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -157,4 +158,12 @@ class ManualSplitFragment : BaseTopFragment(), ManualSplitViewInteraction {
 @BindingAdapter(value = ["selected"])
 fun View.setSelected(selected: Boolean?) {
     isSelected = (selected == true)
+}
+
+@BindingAdapter(value = ["undoOperation"])
+fun TextView.setUndoOperation(undoOperation: ManualSplitOp?) {
+    text = when (undoOperation) {
+        is ManualSplitOp.BreakOperation -> resources.getString(R.string.undo_last_break)
+        else -> resources.getString(R.string.undo)
+    }
 }

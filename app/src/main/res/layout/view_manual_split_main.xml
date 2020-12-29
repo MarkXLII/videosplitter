@@ -33,7 +33,7 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
-            android:text="Manual splits"
+            android:text="@string/manual_splits"
             android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin_half"
             android:layout_marginEnd="@dimen/default_margin"
-            android:text="Take full control! Seek to any position in the video and click Break to split at that position"
+            android:text="@string/take_full_control_seek_to_any_position_in_the_video_and_click_break_to_split_at_that_position"
             android:textAppearance="?attr/textAppearanceBody2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,11 +91,11 @@
             android:layout_marginStart="@dimen/default_margin"
             android:enabled="@{manualSplitViewModel.undoAvailable}"
             android:onClick="@{() -> viewInteraction.undo()}"
-            android:text="Undo last break"
             app:layout_constraintBottom_toBottomOf="@id/breakButton"
             app:layout_constraintEnd_toStartOf="@+id/breakButton"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:undoOperation="@{manualSplitViewModel.undoOperation}" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/breakButton"
@@ -106,7 +106,7 @@
             android:layout_marginEnd="@dimen/default_margin"
             android:layout_marginBottom="@dimen/default_margin"
             android:onClick="@{() -> viewInteraction.breakAtMarker()}"
-            android:text="Break At Marker"
+            android:text="@string/break_at_marker"
             app:layout_constraintBottom_toTopOf="@id/splitButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

@@ -4,19 +4,22 @@ import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.videosplitterapp.filemanager.FileMeta
+import io.github.videosplitterapp.screens.manualsplit.ManualSplitOp.BreakOperation
 import java.util.*
 
 class ManualSplitViewModel : ViewModel() {
 
+    private val undoStack = Stack<ManualSplitOp>()
     val items = ObservableArrayList<ManualSplitModel>()
     val lastSelectedItem = MutableLiveData<ManualSplitModel>()
     val undoAvailable = MutableLiveData<Boolean>()
-    val undoStack = Stack<Pair<ManualSplitModel, ManualSplitModel>>()
+    val undoOperation = MutableLiveData<ManualSplitOp>()
 
     init {
         items.clear()
         lastSelectedItem.value = null
         undoAvailable.value = false
+        undoOperation.value = null
     }
 
     fun onItemClick(manualSplitModel: ManualSplitModel) {
@@ -66,26 +69,33 @@ class ManualSplitViewModel : ViewModel() {
         newItem1: ManualSplitModel,
         newItem2: ManualSplitModel
     ) {
-        undoStack.add(Pair(newItem1, newItem2))
+        undoStack.add(BreakOperation(newItem1, newItem2))
         stackUpdated()
     }
 
     private fun stackUpdated() {
-        undoAvailable.value = undoStack.isNotEmpty()
+        val notEmpty = undoStack.isNotEmpty()
+        undoAvailable.value = notEmpty
+        undoOperation.value = if (notEmpty) undoStack.peek() else null
     }
 
     fun undo() {
         if (undoStack.isNotEmpty()) {
-            val lastBreak = undoStack.pop()
-            stackUpdated()
-            val index = items.indexOf(lastBreak.first)
-            val newItem = ManualSplitModel(lastBreak.first.startMs, lastBreak.second.endMs).apply {
-                durationString.value = getTimeString(this)
+            when (val lastOp = undoStack.pop()) {
+                is BreakOperation -> {
+                    stackUpdated()
+                    val index = items.indexOf(lastOp.partOne)
+                    val newItem =
+                        ManualSplitModel(lastOp.partOne.startMs, lastOp.partTwo.endMs).apply {
+                            durationString.value = getTimeString(this)
+                        }
+                    items.remove(lastOp.partOne)
+                    items.remove(lastOp.partTwo)
+                    items.add(index, newItem)
+                    onItemClick(newItem)
+                }
             }
-            items.remove(lastBreak.first)
-            items.remove(lastBreak.second)
-            items.add(index, newItem)
-            onItemClick(newItem)
+
         }
     }
 
