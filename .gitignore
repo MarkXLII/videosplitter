@@ -89,3 +89,4 @@ lint/tmp/
 *.hprof
 keystore.properties
 *.keystore
+app/google-services.json

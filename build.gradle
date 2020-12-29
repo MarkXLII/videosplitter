@@ -19,6 +19,9 @@ buildscript {
     ext.hilt_version = "2.28.1-alpha"
     ext.hilt_jetpack_version = "1.0.0-alpha02"
     ext.preference_version = "1.1.1"
+    ext.google_service_version = "4.3.4"
+    ext.firebase_crashlytics_gradle_version = "2.4.1"
+    ext.firebase_bom_version = "26.2.0"
 
     ext.junit_version = "4.13"
     ext.ext_junit_version = "1.1.2"
@@ -34,6 +37,8 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$safe_args_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath "com.google.gms:google-services:$google_service_version"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:$firebase_crashlytics_gradle_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
