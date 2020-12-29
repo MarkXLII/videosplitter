@@ -238,6 +238,7 @@ class FileManagerImpl @Inject constructor(
                     newProjectDir.mkdir()
                 }
                 moveProject(it, newProjectDir)
+                it.delete()
             }
         }
     }
@@ -253,6 +254,7 @@ class FileManagerImpl @Inject constructor(
                     newProjectDir.mkdir()
                 }
                 moveSplits(it, newSplitDir)
+                it.delete()
             }
         }
     }
