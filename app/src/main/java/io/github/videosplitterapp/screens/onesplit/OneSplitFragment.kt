@@ -23,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.videosplitterapp.BaseTopFragment
 import io.github.videosplitterapp.R
 import io.github.videosplitterapp.databinding.OneSplitFragmentBinding
+import io.github.videosplitterapp.ktx.getMinSecString
 import io.github.videosplitterapp.screens.thirtysecsplit.ThirtySecSplitViewInteraction
 import kotlinx.android.synthetic.main.view_one_split_main.*
 import java.util.concurrent.TimeUnit
@@ -91,7 +92,8 @@ class OneSplitFragment : BaseTopFragment(), ThirtySecSplitViewInteraction {
                         if (end - start > 0) {
                             // This is the MediaSource representing the media to be played.
                             player.release()
-                            videoSource = ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri)
+                            videoSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+                                .createMediaSource(uri)
                             player = SimpleExoPlayer.Builder(requireContext()).build()
                             playerView.player = player
                             player.prepare(videoSource)
@@ -155,5 +157,11 @@ class OneSplitFragment : BaseTopFragment(), ThirtySecSplitViewInteraction {
 @BindingAdapter(value = ["timeRange"])
 fun TextView.setTimeRangeChooserHintText(timeRange: List<Float>?) {
     if (timeRange == null || timeRange.size < 2) return
-    text = String.format("Create a split from %ds to %ds", timeRange[0].toInt(), timeRange[1].toInt())
+    val start = timeRange[0].roundToLong() * 1000
+    val end = timeRange[1].roundToLong() * 1000
+    text = String.format(
+        "Create a split from %s to %s",
+        start.getMinSecString(),
+        end.getMinSecString()
+    )
 }

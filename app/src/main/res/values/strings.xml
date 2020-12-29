@@ -60,4 +60,6 @@
 
     <string name="app_name_license" translatable="false">&appname; License [GPLv3]</string>
     <string name="app_source" translatable="false">&appname; Source [GPLv3]</string>
+    <string name="custom_time_splits">Custom time splits</string>
+    <string name="make_custom_time_slices_of_your_video_choose_the_time_below">Make custom time slices of your video, choose the time below.</string>
 </resources>

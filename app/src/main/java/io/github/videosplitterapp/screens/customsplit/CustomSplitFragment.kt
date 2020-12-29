@@ -20,9 +20,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.videosplitterapp.BaseTopFragment
 import io.github.videosplitterapp.R
 import io.github.videosplitterapp.databinding.CustomSplitFragmentBinding
+import io.github.videosplitterapp.ktx.getMinSecString
 import io.github.videosplitterapp.screens.thirtysecsplit.ThirtySecSplitViewInteraction
 import kotlinx.android.synthetic.main.view_custom_split_main.*
 import java.util.concurrent.TimeUnit
+import kotlin.math.roundToLong
 
 
 @AndroidEntryPoint
@@ -115,5 +117,6 @@ class CustomSplitFragment : BaseTopFragment(), ThirtySecSplitViewInteraction {
 
 @BindingAdapter(value = ["time"])
 fun TextView.setTimeChooserHintText(time: Float?) {
-    text = String.format("Split every %d seconds", time?.toInt() ?: 0)
+    val duration = (time?.roundToLong() ?: 0) * 1000
+    text = String.format("Split every %s", duration.getMinSecString())
 }
