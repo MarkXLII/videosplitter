@@ -1,7 +1,6 @@
 package io.github.videosplitterapp.screens.settings
 
 import android.os.Bundle
-import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -9,6 +8,7 @@ import androidx.preference.SwitchPreferenceCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.videosplitterapp.R
+import io.github.videosplitterapp.filemanager.FileManager
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -21,11 +21,18 @@ class SettingsFragment : PreferenceFragmentCompat() {
     @Inject
     lateinit var settings: Settings
 
+    @Inject
+    lateinit var fileManager: FileManager
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceManager.preferenceDataStore = settings.dataStore
         setPreferencesFromResource(R.xml.settings_fragment, rootKey)
+
         val appVersion = findPreference<Preference>("app_version")
         appVersion?.summary = settings.getAppVersionString()
+
+        val libraryLocation = findPreference<Preference>(getString(R.string.library_location))
+        libraryLocation?.summary = fileManager.appStorageRoot.absolutePath
 
         val themeToggle = findPreference<SwitchPreferenceCompat>(getString(R.string.key_dark_theme))
         themeToggle?.setOnPreferenceClickListener {

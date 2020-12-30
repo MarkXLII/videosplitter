@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.annotation.WorkerThread
 import io.github.videosplitterapp.splitsManager.SliceModel
 import io.github.videosplitterapp.splitsManager.SplitsManager
+import java.io.File
 
 interface FileManager {
 
@@ -35,4 +36,6 @@ interface FileManager {
 
     @WorkerThread
     fun migrateStorageToPublicDir()
+
+    val appStorageRoot: File
 }

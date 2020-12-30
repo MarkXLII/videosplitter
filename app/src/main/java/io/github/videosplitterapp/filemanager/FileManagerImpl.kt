@@ -274,7 +274,7 @@ class FileManagerImpl @Inject constructor(
         }
     }
 
-    private val appStorageRoot: File
+    override val appStorageRoot: File
         get() {
             val externalStoragePublicDirectory =
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)

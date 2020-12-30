@@ -41,6 +41,11 @@
             app:key="@string/key_audio_quality"
             app:title="Audio Quality" />
 
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="@string/library_location"
+            app:title="@string/library_location" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
