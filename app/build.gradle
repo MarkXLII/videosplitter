@@ -29,11 +29,12 @@ android {
         applicationId "io.github.videosplitterapp"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3
+        versionCode 4
 
         def majorVersion = 2
-        def minorVersion = 0
-        versionName String.format("%d.%d.%d", majorVersion, minorVersion, versionCode)
+        def minorVersion = 1
+        def hotfixVersion = 0
+        versionName String.format("%d.%d.%d", majorVersion, minorVersion, hotfixVersion)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
