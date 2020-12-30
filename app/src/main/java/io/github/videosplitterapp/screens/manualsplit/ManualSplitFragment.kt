@@ -130,6 +130,10 @@ class ManualSplitFragment : BaseTopFragment(), ManualSplitViewInteraction {
         }
     }
 
+    override fun deletePart(manualSplitModel: ManualSplitModel) {
+        manualSplitViewModel.deletePart(manualSplitModel)
+    }
+
     override fun undo() {
         manualSplitViewModel.undo()
     }
@@ -164,6 +168,7 @@ fun View.setSelected(selected: Boolean?) {
 fun TextView.setUndoOperation(undoOperation: ManualSplitOp?) {
     text = when (undoOperation) {
         is ManualSplitOp.BreakOperation -> resources.getString(R.string.undo_last_break)
+        is ManualSplitOp.DeleteOperation -> resources.getString(R.string.undo_last_delete)
         else -> resources.getString(R.string.undo)
     }
 }

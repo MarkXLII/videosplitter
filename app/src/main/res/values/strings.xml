@@ -66,5 +66,6 @@
     <string name="take_full_control_seek_to_any_position_in_the_video_and_click_break_to_split_at_that_position">Take full control! Seek to any position in the video and click Break to split at that position</string>
     <string name="undo">Undo</string>
     <string name="undo_last_break">Undo last break</string>
+    <string name="undo_last_delete">Undo last delete</string>
     <string name="break_at_marker">Break At Marker</string>
 </resources>

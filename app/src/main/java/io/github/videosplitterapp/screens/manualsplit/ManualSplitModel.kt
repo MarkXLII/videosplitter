@@ -1,10 +1,12 @@
 package io.github.videosplitterapp.screens.manualsplit
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 data class ManualSplitModel(
     val startMs: Long,
     val endMs: Long,
+    val deleteAvailable: LiveData<Boolean>,
     val durationString: MutableLiveData<String> = MutableLiveData(),
     val selected: MutableLiveData<Boolean> = MutableLiveData()
 ) {

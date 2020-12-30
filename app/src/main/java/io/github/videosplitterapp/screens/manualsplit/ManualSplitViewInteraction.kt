@@ -6,6 +6,8 @@ interface ManualSplitViewInteraction : ThirtySecSplitViewInteraction {
 
     fun onItemClick(manualSplitModel: ManualSplitModel)
 
+    fun deletePart(manualSplitModel: ManualSplitModel)
+
     fun breakAtMarker()
 
     fun undo()
