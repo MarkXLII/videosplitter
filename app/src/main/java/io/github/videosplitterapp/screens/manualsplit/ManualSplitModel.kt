@@ -32,6 +32,4 @@ data class ManualSplitModel(
         result = 31 * result + endMs.hashCode()
         return result
     }
-
-
 }

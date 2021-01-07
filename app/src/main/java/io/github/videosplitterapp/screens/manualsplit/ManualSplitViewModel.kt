@@ -5,6 +5,7 @@ import androidx.databinding.ObservableList
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.videosplitterapp.filemanager.FileMeta
+import io.github.videosplitterapp.ktx.getDurationString
 import io.github.videosplitterapp.screens.manualsplit.ManualSplitOp.BreakOperation
 import io.github.videosplitterapp.screens.manualsplit.ManualSplitOp.DeleteOperation
 import java.util.*
@@ -89,13 +90,11 @@ class ManualSplitViewModel : ViewModel() {
     }
 
     private fun getTimeString(item: ManualSplitModel): String {
-        return String.format("%s - %s", getTimeString(item.startMs), getTimeString(item.endMs))
-    }
-
-    private fun getTimeString(duration: Long): String {
-        val minutes: Long = duration / 1000 / 60
-        val seconds: Long = duration / 1000 % 60
-        return String.format("%02d:%02d", minutes, seconds)
+        return String.format(
+            "%s - %s",
+            item.startMs.getDurationString(),
+            item.endMs.getDurationString()
+        )
     }
 
     @Synchronized

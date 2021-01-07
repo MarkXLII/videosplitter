@@ -10,7 +10,7 @@ import com.arthenica.mobileffmpeg.FFprobe
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.github.videosplitterapp.R
 import io.github.videosplitterapp.ffmpeg.FFMpegUtil
-import io.github.videosplitterapp.ktx.getMinSecString
+import io.github.videosplitterapp.ktx.getDurationString
 import io.github.videosplitterapp.splitsManager.SliceModel
 import io.github.videosplitterapp.splitsManager.SplitsManager
 import java.io.File
@@ -202,7 +202,7 @@ class FileManagerImpl @Inject constructor(
                         subtitle = "",
                         splitStart = 0L,
                         splitEnd = 0L,
-                        duration = duration.getMinSecString(),
+                        duration = duration.getDurationString(),
                         outputFilePath = it.absolutePath,
                         sourceFile = it
                     ).also { model ->

@@ -23,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.videosplitterapp.BaseTopFragment
 import io.github.videosplitterapp.R
 import io.github.videosplitterapp.databinding.OneSplitFragmentBinding
-import io.github.videosplitterapp.ktx.getMinSecString
+import io.github.videosplitterapp.ktx.getDurationString
 import io.github.videosplitterapp.screens.thirtysecsplit.ThirtySecSplitViewInteraction
 import kotlinx.android.synthetic.main.view_one_split_main.*
 import java.util.concurrent.TimeUnit
@@ -161,7 +161,7 @@ fun TextView.setTimeRangeChooserHintText(timeRange: List<Float>?) {
     val end = timeRange[1].roundToLong() * 1000
     text = String.format(
         "Create a split from %s to %s",
-        start.getMinSecString(),
-        end.getMinSecString()
+        start.getDurationString(),
+        end.getDurationString()
     )
 }

@@ -13,6 +13,7 @@ import io.github.videosplitterapp.SingleLiveEvent
 import io.github.videosplitterapp.ffmpeg.FFMpegUtil
 import io.github.videosplitterapp.filemanager.FileManager
 import io.github.videosplitterapp.filemanager.FileMeta
+import io.github.videosplitterapp.ktx.getDurationString
 import io.github.videosplitterapp.splitsManager.SplitsManager.SplitType
 import io.github.videosplitterapp.splitsManager.SplitsManager.State
 import kotlinx.coroutines.Dispatchers
@@ -274,8 +275,8 @@ class SplitsManagerImpl @ViewModelInject constructor(
         splitName: String
     ): SliceModel {
         val splitNamePart = if (splitName.isBlank()) "" else "_${splitName}_"
-        val startStr = getTimeString(splitStart)
-        val endStr = getTimeString(splitEnd)
+        val startStr = splitStart.getDurationString()
+        val endStr = splitEnd.getDurationString()
         val outputFileName = "${meta.titleNoExt}${splitNamePart}${splitStart}_${splitEnd}"
         val outputFilePath = fileManager.generatePath(
             outputDir,
@@ -290,12 +291,6 @@ class SplitsManagerImpl @ViewModelInject constructor(
             outputFilePath = outputFilePath,
             sourceFile = meta.sourceFile
         )
-    }
-
-    private fun getTimeString(duration: Long): String {
-        val minutes: Long = duration / 1000 / 60
-        val seconds: Long = duration / 1000 % 60
-        return String.format("%02d:%02d", minutes, seconds)
     }
 
     private fun ffMpegSplit(slices: List<SliceModel>) {
