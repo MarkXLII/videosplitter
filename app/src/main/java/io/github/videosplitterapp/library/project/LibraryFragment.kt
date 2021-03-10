@@ -1,9 +1,7 @@
 package io.github.videosplitterapp.library.project
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -11,22 +9,29 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.videosplitterapp.BR
 import io.github.videosplitterapp.BaseTopFragment
 import io.github.videosplitterapp.R
 import io.github.videosplitterapp.databinding.LibraryFragmentBinding
+import io.github.videosplitterapp.filemanager.FileManager
 import io.github.videosplitterapp.filemanager.ProjectModel
 import io.github.videosplitterapp.library.ActionModeHelper
 import kotlinx.android.synthetic.main.library_fragment.*
 import me.tatarka.bindingcollectionadapter2.ItemBinding
+import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class LibraryFragment : BaseTopFragment(),
     LibraryViewInteraction {
 
     private val libraryViewModel: LibraryViewModel by viewModels()
+
+    @Inject
+    lateinit var fileManager: FileManager
 
     private val itemBinding =
         ItemBinding.of<ProjectModel>(BR.item, R.layout.item_view_project)
@@ -50,6 +55,7 @@ class LibraryFragment : BaseTopFragment(),
                 fileMeta = splitsManager.fileMeta.value
             )
         })
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -70,6 +76,26 @@ class LibraryFragment : BaseTopFragment(),
             val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             setLayoutManager(layoutManager)
             addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.library_fragment_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.libraryLocation -> {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(resources.getString(R.string.library_location))
+                    .setMessage(fileManager.appStorageRoot.absolutePath)
+                    .setPositiveButton(resources.getString(R.string.ok)) { _, _ ->
+                    }
+                    .show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
