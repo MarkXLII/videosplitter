@@ -26,11 +26,11 @@
     <string name="quality_setting_summary">%1$s\n\nHigher the quality, larger the output file size and can take longer time process</string>
 
     <string name="video_quality_value_original">copy</string>
-    <string name="video_quality_value_very_low">libx264 -preset faster</string>
-    <string name="video_quality_value_low">libx264 -preset fast</string>
-    <string name="video_quality_value_medium">libx264 -preset medium</string>
-    <string name="video_quality_value_high">libx264 -preset slow</string>
-    <string name="video_quality_value_very_high">libx264 -preset veryslow</string>
+    <string name="video_quality_value_very_low">libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p -preset faster</string>
+    <string name="video_quality_value_low">libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p -preset fast</string>
+    <string name="video_quality_value_medium">libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p -preset medium</string>
+    <string name="video_quality_value_high">libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p -preset slow</string>
+    <string name="video_quality_value_very_high">libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p -preset veryslow</string>
 
     <string name="audio_quality_value_original">copy</string>
     <string name="audio_quality_value_very_low">aac -qscale:a 9</string>

@@ -70,7 +70,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // AndroidX
     implementation "androidx.core:core-ktx:$core_version"

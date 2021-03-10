@@ -3,7 +3,7 @@ package io.github.videosplitterapp.hilt
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import io.github.videosplitterapp.ffmpeg.FFMpegUtil
 import io.github.videosplitterapp.ffmpeg.FFMpegUtilImpl
 import io.github.videosplitterapp.filemanager.FileManager
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Suppress("unused")
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class AppModule {
 
     @Binds
