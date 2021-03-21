@@ -1,8 +1,6 @@
 # Video Splitter (Ad Free)
 
-https://play.google.com/store/apps/details?id=io.github.videosplitterapp
-
-##### Features:
+#### Features:
 
 - Completely free without any ads and no user data is collected.
 - Split your videos seamlessly into 30 seconds or custom splits for WhatsApp* and other social media platforms.
@@ -18,3 +16,11 @@ https://play.google.com/store/apps/details?id=io.github.videosplitterapp
 | ![One](https://user-images.githubusercontent.com/13308678/111888782-d8cab980-899c-11eb-9ff3-6dbc140a9a5d.png) | ![Settings](https://user-images.githubusercontent.com/13308678/111888783-da947d00-899c-11eb-974f-7c39b05567fc.png) | ![Share](https://user-images.githubusercontent.com/13308678/111888784-db2d1380-899c-11eb-8871-86d4866e5358.png) | ![Theme](https://user-images.githubusercontent.com/13308678/111888786-dc5e4080-899c-11eb-8604-be76705b1b90.png) |
 
 \* All product and company names are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.
+
+#### Source Code
+
+https://github.com/MarkXLII/videosplitter
+
+[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="google-play-badge" style="zoom:33%;" />](https://play.google.com/store/apps/details?id=io.github.videosplitterapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
+
+Google Play and the Google Play logo are trademarks of Google LLC.
