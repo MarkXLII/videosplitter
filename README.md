@@ -17,9 +17,7 @@
 
 \* All product and company names are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.
 
-#### Source Code
-
-https://github.com/MarkXLII/videosplitter
+#### Download the App
 
 [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="google-play-badge" width="33%" />](https://play.google.com/store/apps/details?id=io.github.videosplitterapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
 
