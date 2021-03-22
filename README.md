@@ -21,6 +21,6 @@
 
 https://github.com/MarkXLII/videosplitter
 
-[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="google-play-badge" style="zoom:33%;" />](https://play.google.com/store/apps/details?id=io.github.videosplitterapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
+[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="google-play-badge" width="33%" />](https://play.google.com/store/apps/details?id=io.github.videosplitterapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
 
 Google Play and the Google Play logo are trademarks of Google LLC.
