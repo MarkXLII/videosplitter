@@ -4,11 +4,8 @@ import android.net.Uri
 import android.util.Log
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import io.github.videosplitterapp.SingleLiveEvent
 import io.github.videosplitterapp.ffmpeg.FFMpegUtil
 import io.github.videosplitterapp.filemanager.FileManager
@@ -16,17 +13,15 @@ import io.github.videosplitterapp.filemanager.FileMeta
 import io.github.videosplitterapp.ktx.getDurationString
 import io.github.videosplitterapp.splitsManager.SplitsManager.SplitType
 import io.github.videosplitterapp.splitsManager.SplitsManager.State
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancelAndJoin
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
+import javax.inject.Inject
 
-class SplitsManagerImpl @ViewModelInject constructor(
+class SplitsManagerImpl @Inject constructor(
     private val ffMpegUtil: FFMpegUtil,
     private val fileManager: FileManager
-) : ViewModel(), SplitsManager {
+) : SplitsManager {
 
     companion object {
         private val TAG = SplitsManagerImpl::class.java.name
@@ -46,7 +41,7 @@ class SplitsManagerImpl @ViewModelInject constructor(
     }
 
     override fun migrateStorageToPublicDir() {
-        viewModelScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             _libraryMigration.postValue(true)
             fileManager.migrateStorageToPublicDir()
             _libraryMigration.postValue(false)
@@ -56,7 +51,7 @@ class SplitsManagerImpl @ViewModelInject constructor(
     @UiThread
     override fun importFile(uri: Uri) {
         Log.d(TAG, "importFile() called with: uri = $uri")
-        viewModelScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             _state.postValue(State.PROCESSING_VIDEO)
             val displayName = fileManager.checkIfValidFile(uri)
             if (displayName.isBlank()) {
@@ -88,7 +83,7 @@ class SplitsManagerImpl @ViewModelInject constructor(
         Log.d(TAG, "doThirtySecSplits() called")
         val meta = _fileMeta.value
         if (meta != null) {
-            currentJob = viewModelScope.launch(Dispatchers.IO) {
+            currentJob = GlobalScope.launch(Dispatchers.IO) {
                 _state.postValue(State.SPLITTING.ofType(SplitType.THIRTY_SEC))
                 val outputDir = fileManager.createSplitDirs(SplitType.THIRTY_SEC, meta)
                 if (outputDir.isBlank()) {
@@ -116,7 +111,7 @@ class SplitsManagerImpl @ViewModelInject constructor(
         Log.d(TAG, "doCustomSplits() called with: time = $time")
         val meta = _fileMeta.value
         if (meta != null) {
-            currentJob = viewModelScope.launch(Dispatchers.IO) {
+            currentJob = GlobalScope.launch(Dispatchers.IO) {
                 _state.postValue(State.SPLITTING.ofType(SplitType.CUSTOM_TIME))
                 val outputDir = fileManager.createSplitDirs(SplitType.CUSTOM_TIME, meta)
                 if (outputDir.isBlank()) {
@@ -144,7 +139,7 @@ class SplitsManagerImpl @ViewModelInject constructor(
         Log.d(TAG, "doOneSplit() called with: startTime = $startTime, endTime = $endTime")
         val meta = _fileMeta.value
         if (meta != null) {
-            currentJob = viewModelScope.launch(Dispatchers.IO) {
+            currentJob = GlobalScope.launch(Dispatchers.IO) {
                 _state.postValue(State.SPLITTING.ofType(SplitType.ONE))
                 val outputDir = fileManager.createSplitDirs(SplitType.ONE, meta)
                 if (outputDir.isBlank()) {
@@ -175,7 +170,7 @@ class SplitsManagerImpl @ViewModelInject constructor(
         Log.d(TAG, "doManualSplits() called with: times = $times")
         val meta = _fileMeta.value
         if (meta != null) {
-            currentJob = viewModelScope.launch(Dispatchers.IO) {
+            currentJob = GlobalScope.launch(Dispatchers.IO) {
                 _state.postValue(State.SPLITTING.ofType(SplitType.MANUAL))
                 val outputDir = fileManager.createSplitDirs(SplitType.MANUAL, meta)
                 if (outputDir.isBlank()) {
@@ -205,7 +200,7 @@ class SplitsManagerImpl @ViewModelInject constructor(
     @UiThread
     override fun abort() {
         Log.d(TAG, "abort() called")
-        viewModelScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             aborted.set(true)
             ffMpegUtil.abort()
             currentJob?.cancelAndJoin()
@@ -219,7 +214,7 @@ class SplitsManagerImpl @ViewModelInject constructor(
 
     private fun reset() {
         Log.d(TAG, "reset() called")
-        viewModelScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             resetUnsafe()
         }
     }
@@ -310,7 +305,7 @@ class SplitsManagerImpl @ViewModelInject constructor(
         }
     }
 
-    fun removeAll(selected: List<SliceModel>) {
+    override fun removeAll(selected: List<SliceModel>) {
         val list = ArrayList(_slices.value.orEmpty())
         list.removeAll(selected)
         _slices.postValue(list)

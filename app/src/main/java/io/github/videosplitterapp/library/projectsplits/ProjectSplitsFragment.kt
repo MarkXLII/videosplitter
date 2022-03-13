@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -25,9 +24,9 @@ import io.github.videosplitterapp.filemanager.ProjectSplitModel
 import io.github.videosplitterapp.library.ActionModeHelper
 import io.github.videosplitterapp.splitsManager.SplitsManager
 import io.github.videosplitterapp.splitsManager.SplitsManager.SplitType.*
-import io.github.videosplitterapp.splitsManager.SplitsManagerImpl
 import kotlinx.android.synthetic.main.library_fragment.*
 import me.tatarka.bindingcollectionadapter2.ItemBinding
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProjectSplitsFragment :
@@ -35,7 +34,9 @@ class ProjectSplitsFragment :
     ProjectSplitsViewInteraction {
 
     private val projectSplitsViewModel: ProjectSplitsViewModel by viewModels()
-    private val splitsManager: SplitsManagerImpl by activityViewModels()
+
+    @Inject
+    lateinit var splitsManager: SplitsManager
 
     private val itemBinding =
         ItemBinding.of<ProjectSplitModel>(BR.item, R.layout.item_view_project_split)

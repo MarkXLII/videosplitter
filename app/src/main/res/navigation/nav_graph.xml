@@ -199,7 +199,7 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="io.github.videosplitterapp.MainActivity"
+        android:name="io.github.videosplitterapp.landing.MainActivity"
         android:label="MainActivity"
         tools:layout="@layout/main_activity" />
 

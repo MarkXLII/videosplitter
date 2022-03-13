@@ -4,16 +4,16 @@ import android.net.Uri
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
 import io.github.videosplitterapp.library.localsplits.ActionModeViewModel
 import io.github.videosplitterapp.splitsManager.SliceModel
-import io.github.videosplitterapp.splitsManager.SplitsManagerImpl
+import io.github.videosplitterapp.splitsManager.SplitsManager
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.File
 
 class SplitsActionModeViewModel(
-    private val splitsManager: SplitsManagerImpl
+    private val splitsManager: SplitsManager
 ) : ActionModeViewModel<SliceModel> {
 
     val inEditMode = MutableLiveData<Boolean>()
@@ -46,7 +46,7 @@ class SplitsActionModeViewModel(
     }
 
     override fun deleteSelectedFiles(callback: () -> Unit) {
-        splitsManager.viewModelScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             val selected = getSelected()
             splitsManager.removeAll(selected)
             selected.forEach {

@@ -1,4 +1,4 @@
-package io.github.videosplitterapp
+package io.github.videosplitterapp.landing
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

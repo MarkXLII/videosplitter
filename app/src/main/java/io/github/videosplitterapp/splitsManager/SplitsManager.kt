@@ -49,6 +49,8 @@ interface SplitsManager {
 
     fun migrateStorageToPublicDir()
 
+    fun removeAll(selected: List<SliceModel>)
+
     enum class State(var splitType: SplitType? = null) {
         IDLE,
         PROCESSING_VIDEO,

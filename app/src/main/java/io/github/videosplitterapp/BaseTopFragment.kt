@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.videosplitterapp.splitsManager.SplitsManager
-import io.github.videosplitterapp.splitsManager.SplitsManagerImpl
+import javax.inject.Inject
 
+@AndroidEntryPoint
 abstract class BaseTopFragment : Fragment() {
 
-    protected val splitsManager: SplitsManagerImpl by activityViewModels()
+    @Inject
+    lateinit var splitsManager: SplitsManager
 
     companion object {
         private val TAG = BaseTopFragment::class.java.name

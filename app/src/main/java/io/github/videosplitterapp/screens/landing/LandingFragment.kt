@@ -13,19 +13,21 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.videosplitterapp.R
 import io.github.videosplitterapp.databinding.LandingFragmentBinding
-import io.github.videosplitterapp.splitsManager.SplitsManagerImpl
+import io.github.videosplitterapp.splitsManager.SplitsManager
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class LandingFragment : Fragment(), LandingViewInteraction {
 
-    private val splitsManager: SplitsManagerImpl by activityViewModels()
+    @Inject
+    lateinit var splitsManager: SplitsManager
 
     private val permissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()

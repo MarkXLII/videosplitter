@@ -10,6 +10,8 @@ import io.github.videosplitterapp.filemanager.FileManager
 import io.github.videosplitterapp.filemanager.FileManagerImpl
 import io.github.videosplitterapp.screens.settings.Settings
 import io.github.videosplitterapp.screens.settings.SettingsImpl
+import io.github.videosplitterapp.splitsManager.SplitsManager
+import io.github.videosplitterapp.splitsManager.SplitsManagerImpl
 import javax.inject.Singleton
 
 @Suppress("unused")
@@ -28,4 +30,8 @@ abstract class AppModule {
     @Binds
     @Singleton
     abstract fun bindSettings(settingsImpl: SettingsImpl): Settings
+
+    @Binds
+    @Singleton
+    abstract fun bindSplitsManager(splitsManagerImpl: SplitsManagerImpl): SplitsManager
 }
