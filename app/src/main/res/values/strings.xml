@@ -69,4 +69,8 @@
     <string name="undo_last_delete">Undo last delete</string>
     <string name="break_at_marker">Break At Marker</string>
     <string name="library_location">Library Location</string>
+    <string name="library">Library</string>
+    <string name="please_wait">Please wait</string>
+    <string name="migrating_videos">Migrating videos to new library location...</string>
+    <string name="unable_to_process_file">Unable to process file</string>
 </resources>

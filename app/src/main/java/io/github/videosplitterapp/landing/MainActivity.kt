@@ -1,7 +1,6 @@
 package io.github.videosplitterapp.landing
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -29,8 +28,8 @@ class MainActivity : AppCompatActivity() {
     }
     private val migrationAlertDialog by lazy {
         MaterialAlertDialogBuilder(this)
-            .setTitle("Please wait")
-            .setMessage("Migrating videos to new library location...")
+            .setTitle(getString(R.string.please_wait))
+            .setMessage(getString(R.string.migrating_videos))
             .setCancelable(false)
             .create()
     }

@@ -1,6 +1,7 @@
 package io.github.videosplitterapp.landing
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +28,7 @@ class MainViewModel @Inject constructor(
 
     val showBottomNav: LiveData<Boolean> =
         Transformations.switchMap(splitsManager.state) { state ->
-            return@switchMap SingleLiveEvent<Boolean>().also {
+            return@switchMap MutableLiveData<Boolean>().also {
                 it.value = when (state) {
                     IDLE -> false
                     PROCESSING_VIDEO -> false
