@@ -29,7 +29,7 @@ android {
         applicationId "io.github.videosplitterapp"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 7
+        versionCode 8
 
         def majorVersion = 2
         def minorVersion = 2
