@@ -1,4 +1,4 @@
-# Video Splitter (Ad Free)
+# Video Splitter
 
 #### Features:
 
